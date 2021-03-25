@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-fallthrough */
+import React, { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import * as p from "./pages";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+//import { Home } from "./pages/Home/Home";
 
-function App() {
+const App: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+  useEffect(() => {
+    console.log("is Auth>>>", isAuthenticated);
+
+    fetch(`http://localhost:8000/check-auth`)
+      .then((res) => {
+        console.log(res);
+        switch (res.status) {
+          case 200:
+            setIsAuthenticated(true);
+            break;
+          default:
+            setIsAuthenticated(false);
+        }
+      })
+      .catch(console.error);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch>
+        <Route
+          exact
+          path="/login"
+          render={(props) => (
+            <p.Login {...props} setIsAuthenticated={setIsAuthenticated} />
+          )}
+        />
+        <PrivateRoute
+          exact
+          path="/"
+          component={p.Home}
+          isAuthenticated={isAuthenticated}
+        />
+        <PrivateRoute
+          exact
+          path="/profile"
+          component={p.Profile}
+          isAuthenticated={isAuthenticated}
+        />
+      </Switch>
+    </>
   );
-}
+};
 
 export default App;
