@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const Home = styled.div`
-  background-color: #ffcc5c;
+export const LogOut = styled.div`
   text-align: center;
   height: 100vh;
-
 `;

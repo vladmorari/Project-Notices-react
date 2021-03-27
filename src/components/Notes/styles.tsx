@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const Notes = styled.div`
-  background-color: green;
-  width: 80%;
-  height: 80%;
-  border: 2px solid red;
+  width: 60%;
   margin: auto;
   margin-top: 16px;
+  overflow: auto;
 `;

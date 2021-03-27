@@ -5,7 +5,7 @@ export const Profile: React.FC = () => {
   return (
     <s.Profile>
       <c.Header />
-      <h1>My ofice</h1>
+      <h3>My profile</h3>
     </s.Profile>
   );
 };

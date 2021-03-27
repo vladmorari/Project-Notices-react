@@ -1,19 +1,19 @@
-/* eslint-disable no-fallthrough */
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as p from "./pages";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-//import { Home } from "./pages/Home/Home";
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(true);
 
   useEffect(() => {
-    console.log("is Auth>>>", isAuthenticated);
-
-    fetch(`http://localhost:8000/check-auth`)
+    const token: any = localStorage.getItem("token");
+    fetch(`http://localhost:8000/check-auth`, {
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((res) => {
-        console.log(res);
         switch (res.status) {
           case 200:
             setIsAuthenticated(true);
@@ -37,14 +37,26 @@ const App: React.FC = () => {
         />
         <PrivateRoute
           exact
-          path="/"
-          component={p.Home}
+          path="/notices"
+          component={p.MyNotices}
           isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           exact
-          path="/profile"
+          path="/"
           component={p.Profile}
+          isAuthenticated={isAuthenticated}
+        />
+        <PrivateRoute
+          exact
+          path="/logout"
+          component={p.LogOut}
+          isAuthenticated={isAuthenticated}
+        />
+        <PrivateRoute
+          exact
+          path="/notices/:id"
+          component={p.Notice}
           isAuthenticated={isAuthenticated}
         />
       </Switch>
