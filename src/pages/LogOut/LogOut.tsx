@@ -2,17 +2,18 @@ import React from "react";
 import * as s from "./styles";
 import * as c from "../../components";
 import { useHistory } from "react-router-dom";
-export const LogOut: React.FC = () => {
+import * as req from "../../components/requests";
+export const LogOut: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();
   const noButton = () => {
     return history.push("/");
   };
   const yesButton = () => {
-    fetch(`http://localhost:8000/logout`, {
-      method: "get",
-    })
-      .then((res) => {
+    req
+      .logOut()
+      .then(() => {
         localStorage.removeItem("token");
+        setIsAuthenticated(false);
         return history.push("/login");
       })
       .catch(console.error);

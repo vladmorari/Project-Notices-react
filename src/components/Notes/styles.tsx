@@ -5,4 +5,5 @@ export const Notes = styled.div`
   margin: auto;
   margin-top: 16px;
   overflow: auto;
+
 `;

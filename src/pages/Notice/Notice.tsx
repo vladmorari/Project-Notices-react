@@ -1,35 +1,46 @@
 import React, { useEffect } from "react";
-import { useParams,useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import * as c from "../../components";
 import * as s from "./style";
+import * as req from "../../components/requests";
+
 interface Params {
   id: string;
 }
+
 export const Notice: React.FC = () => {
   const history = useHistory();
+  const params: Params = useParams();
   const [noticeData, setNoticeData] = React.useState({
     title: "",
     content: "",
   });
 
-  const goToNotice=()=>{
-    history.push("/notices")
-  }
-  const params: Params = useParams();
-  useEffect(() => {
-    const token: any = localStorage.getItem("token");
-    fetch(`http://localhost:8000/notices/${params.id}`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+  const goToNotice = () => {
+    history.push("/notices");
+  };
+  
+  const deleteNote = (e: any) => {
+    e.preventDefault();
+    req
+      .deleteNotice(params.id)
       .then((res) => {
-        return res.json();
+        console.log(res);
       })
-      .then((data) => {
-        setNoticeData(data);
+      .catch((err) => {
+        console.log(err);
+      });
+    history.push("/notices");
+  };
+  useEffect(() => {
+    req
+      .getNotice(params.id)
+      .then((res) => {
+        setNoticeData(res.data);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
   }, [params.id]);
 
   return Object.keys(noticeData).length === 0 ? (
@@ -42,7 +53,7 @@ export const Notice: React.FC = () => {
         <h3> {`${noticeData.title}`}</h3>
         <h3> {`${noticeData.content}`}</h3>
         <div>
-          <button>Delete</button>
+          <button onClick={deleteNote}>Delete</button>
           <button>Edite</button>
         </div>
       </s.Notice>

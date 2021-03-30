@@ -2,17 +2,12 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as p from "./pages";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-
+import * as req from "./components/requests";
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(true);
 
   useEffect(() => {
-    const token: any = localStorage.getItem("token");
-    fetch(`http://localhost:8000/check-auth`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    req.checkAuth()
       .then((res) => {
         switch (res.status) {
           case 200:
@@ -37,6 +32,14 @@ const App: React.FC = () => {
         />
         <PrivateRoute
           exact
+          path="/logout"
+          isAuthenticated={isAuthenticated}
+          render={(props: any) => (
+            <p.LogOut {...props} setIsAuthenticated={setIsAuthenticated} />
+          )}
+        />
+        <PrivateRoute
+          exact
           path="/notices"
           component={p.MyNotices}
           isAuthenticated={isAuthenticated}
@@ -49,14 +52,14 @@ const App: React.FC = () => {
         />
         <PrivateRoute
           exact
-          path="/logout"
-          component={p.LogOut}
+          path="/notices/:id"
+          component={p.Notice}
           isAuthenticated={isAuthenticated}
         />
         <PrivateRoute
           exact
-          path="/notices/:id"
-          component={p.Notice}
+          path="/createNote"
+          component={p.NewNotice}
           isAuthenticated={isAuthenticated}
         />
       </Switch>

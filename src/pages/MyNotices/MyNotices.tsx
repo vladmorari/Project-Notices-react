@@ -6,7 +6,7 @@ export const MyNotices: React.FC = () => {
     <>
       <c.Header />
       <s.Content>
-        <s.Create>Create new note</s.Create>
+        <s.L to={`/createNote`}>Create new note</s.L>
         <c.Notes />
       </s.Content>
     </>

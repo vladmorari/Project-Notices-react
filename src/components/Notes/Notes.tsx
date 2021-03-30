@@ -1,28 +1,26 @@
 import React, { useEffect } from "react";
 import * as s from "./styles";
 import { NoticePreview } from "../NoticePreview";
+import * as req from "../../components/requests";
+
 export const Notes: React.FC = () => {
   const [notes, setnotes] = React.useState([]);
+
   useEffect(() => {
-    const token: any = localStorage.getItem("token");
-    fetch(`http://localhost:8000/notices`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    req
+      .getNotices()
       .then((res) => {
-        return res.json();
+        setnotes(res.data);
       })
-      .then((data) => {
-        setnotes(data);
-      })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
     <s.Notes>
       {notes.length < 1 ? (
-        <div>Loading</div>
+        <div>Not notice yet, you can add one !</div>
       ) : (
         <div>
           {notes.map((tag: any) => (

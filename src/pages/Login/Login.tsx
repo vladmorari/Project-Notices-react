@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import * as s from "./style";
+import * as req from "../../components/requests";
 
 export const Login: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();
@@ -18,28 +19,19 @@ export const Login: React.FC<any> = ({ setIsAuthenticated }) => {
   const handleSubmit = (e: any) => {
     setErrMesage("");
     e.preventDefault();
-    fetch(`http://localhost:8000/login`, {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: {
-        Accept: "application/json", //indicam explicit ce tip de content clientul e capabil sa primeasca
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res: any) => {
-        console.log("res.....", res.status);
-        if (res.status === 200) {
-          return res.json();
-        }
-        return setErrMesage("Invalid credentials");
-      })
-      .then((data: any) => {
-        console.log("data", data);
-        if (data !== undefined) {
-          localStorage.setItem("token", data.token);
+    req
+      .logIn(username, password)
+      .then((res) => {
+        if (res.data !== undefined) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userName", res.data.user);
           setIsAuthenticated(true);
           return history.push("/");
         }
+      })
+      .catch((err) => {
+        console.log("eroare...", err);
+        setErrMesage("Invalid credentials");
       });
   };
 
