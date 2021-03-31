@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import * as c from "../../components";
 import * as s from "./style";
 import * as req from "../../components/requests";
-
+import * as M from "../../components/EditModal";
 interface Params {
   id: string;
 }
@@ -15,11 +15,15 @@ export const Notice: React.FC = () => {
     title: "",
     content: "",
   });
+  const [isModalOpen, setModalState] = React.useState(false);
+  const toogleModal = () => {
+    setModalState(!isModalOpen);
+  };
 
   const goToNotice = () => {
     history.push("/notices");
   };
-  
+
   const deleteNote = (e: any) => {
     e.preventDefault();
     req
@@ -32,6 +36,7 @@ export const Notice: React.FC = () => {
       });
     history.push("/notices");
   };
+
   useEffect(() => {
     req
       .getNotice(params.id)
@@ -48,14 +53,22 @@ export const Notice: React.FC = () => {
   ) : (
     <>
       <c.Header />
+
       <s.Notice>
         <s.Close onClick={goToNotice}>X</s.Close>
         <h3> {`${noticeData.title}`}</h3>
         <h3> {`${noticeData.content}`}</h3>
+
         <div>
           <button onClick={deleteNote}>Delete</button>
-          <button>Edite</button>
+          <button onClick={toogleModal}>Edite</button>
         </div>
+        <M.ModalEdit //apelam componenta modal si ii transmitem urmatoarele elemente
+          noticeId={params.id}
+          notice={noticeData}
+          isOpen={isModalOpen}
+          onClose={toogleModal}
+        />
       </s.Notice>
     </>
   );

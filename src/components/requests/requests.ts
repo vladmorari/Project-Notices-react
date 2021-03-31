@@ -46,3 +46,12 @@ export const addNote = (title: string, content: string) => {
     content,
   });
 };
+export const updateNote = (id: string, title: string, content: string) => {
+  return axios.put(`notices/${id}`, {
+    headers: {
+      authorization: localStorage.getItem("token"),
+    },
+    title,
+    content,
+  });
+};
