@@ -4,7 +4,7 @@ import * as p from "./pages";
 import * as c from "./components";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import * as req from "./components/requests";
-
+//Redux version
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(true);
 
