@@ -39,16 +39,20 @@ export const Login: React.FC<any> = ({ setIsAuthenticated }) => {
 
   return (
     <s.Login>
-      <h1>Login page</h1>
-      <label>Username</label>
-      <input type="text" onChange={handeleUsernameChange} />
-
-      <label>Password</label>
-      <input type="password" onChange={handelePasswordChange} />
-      <br />
-      <button onClick={handleSubmit}>Log in</button>
-      <button onClick={goToRegistration}>Registration</button>
-      <h3>{errMesage}</h3>
+      <s.LoginTitle>Login page</s.LoginTitle>
+      <s.Box>
+        <s.Label>Username</s.Label>
+        <s.Input type="text" onChange={handeleUsernameChange}/>
+      </s.Box>
+      <s.Box>
+        <s.Label>Password</s.Label>
+        <s.Input type="password" onChange={handelePasswordChange} />
+      </s.Box>
+      <s.BoxButtons>
+        <s.Button onClick={handleSubmit}>Log in</s.Button>
+        <s.Button onClick={goToRegistration}>Registration</s.Button>
+      </s.BoxButtons>
+      <s.ErrorMesage>{errMesage} </s.ErrorMesage>
     </s.Login>
   );
 };
