@@ -1,29 +1,22 @@
 import React, { useEffect } from "react";
 import * as s from "./styles";
 import { NoticePreview } from "../NoticePreview";
-import * as req from "../../components/requests";
+import { actionGetNotes } from "../../actions/notesActions";
+import { connect } from "react-redux";
 
-export const Notes: React.FC = () => {
-  const [notes, setnotes] = React.useState([]);
-
+const Notes: React.FC = (props: any) => {
+  const { actionGetNotes } = props;
   useEffect(() => {
-    req
-      .getNotices()
-      .then((res) => {
-        setnotes(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    actionGetNotes();
+  }, [actionGetNotes]);
 
   return (
     <s.Notes>
-      {notes.length < 1 ? (
+      {!Array.isArray(props.notes.data) ? (
         <div>Not notice yet, you can add one !</div>
       ) : (
         <div>
-          {notes.map((tag: any) => (
+          {props.notes.data.map((tag: any) => (
             <NoticePreview key={tag._id} notice={tag} />
           ))}
         </div>
@@ -31,3 +24,12 @@ export const Notes: React.FC = () => {
     </s.Notes>
   );
 };
+const mapStateToProps = (state: any) => {
+  return {
+    notes: state.notes.notes,
+  };
+};
+const mapDispatchToProps = {
+  actionGetNotes,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Notes);
