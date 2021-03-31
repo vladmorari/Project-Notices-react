@@ -9,6 +9,11 @@ export const Login = styled.div`
   width: 250px;
   height: 350px;
   border-radius: 2px;
-  box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 20%);
+  box-shadow: inset 0 0 0 200px rgba(100, 100, 100, 20%);
   padding: 20px;
+  transition: 1s;
+  &:hover {
+    transition: 1s;
+    box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 30%);
+  }
 `;

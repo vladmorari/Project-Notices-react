@@ -30,23 +30,24 @@ export const Login: React.FC<any> = ({ setIsAuthenticated }) => {
         }
       })
       .catch((err) => {
-        console.log("eroare...", err);
         setErrMesage("Invalid credentials");
       });
+  };
+  const goToRegistration = () => {
+    return history.push("/registration");
   };
 
   return (
     <s.Login>
       <h1>Login page</h1>
-      <label>
-        Username <input type="text" onChange={handeleUsernameChange} />
-      </label>
-      <br />
-      <label>
-        Password <input type="password" onChange={handelePasswordChange} />
-      </label>
+      <label>Username</label>
+      <input type="text" onChange={handeleUsernameChange} />
+
+      <label>Password</label>
+      <input type="password" onChange={handelePasswordChange} />
       <br />
       <button onClick={handleSubmit}>Log in</button>
+      <button onClick={goToRegistration}>Registration</button>
       <h3>{errMesage}</h3>
     </s.Login>
   );

@@ -3,7 +3,7 @@ import axios from "./axios";
 export const checkAuth = () => {
   return axios.get(`check-auth`, {
     headers: {
-      authorization: localStorage.getItem("token"),
+      authorization: localStorage.getItem("token") || "x",
     },
   });
 };
@@ -38,7 +38,7 @@ export const logIn = (username: string, password: string) => {
 };
 
 export const addNote = (title: string, content: string) => {
-  return axios.post("notices", {
+  return axios.post(`notices`, {
     headers: {
       authorization: localStorage.getItem("token"),
     },
@@ -54,4 +54,11 @@ export const updateNote = (id: string, title: string, content: string) => {
     title,
     content,
   });
+};
+export const createUser = (
+  username: string,
+  mail: string,
+  password: string
+) => {
+  return axios.post(`register`, { username, mail, password });
 };

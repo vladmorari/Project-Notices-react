@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as p from "./pages";
+import * as c from "./components";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import * as req from "./components/requests";
+
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(true);
 
   useEffect(() => {
-    req.checkAuth()
+    req
+      .checkAuth()
       .then((res) => {
         switch (res.status) {
           case 200:
@@ -17,7 +20,9 @@ const App: React.FC = () => {
             setIsAuthenticated(false);
         }
       })
-      .catch(console.error);
+      .catch((err) => {
+        setIsAuthenticated(false);
+      });
   }, []);
 
   return (
@@ -30,13 +35,19 @@ const App: React.FC = () => {
             <p.Login {...props} setIsAuthenticated={setIsAuthenticated} />
           )}
         />
+        <Route
+          exact
+          path="/registration"
+          render={() => (
+            <c.Registration setIsAuthenticated={setIsAuthenticated} />
+          )}
+        />
+
         <PrivateRoute
           exact
           path="/logout"
           isAuthenticated={isAuthenticated}
-          render={(props: any) => (
-            <p.LogOut {...props} setIsAuthenticated={setIsAuthenticated} />
-          )}
+          render={() => <p.LogOut setIsAuthenticated={setIsAuthenticated} />}
         />
         <PrivateRoute
           exact
