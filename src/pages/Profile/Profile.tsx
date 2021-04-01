@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as c from "../../components";
 import * as s from "./style";
-export const Profile: React.FC = () => {
+import { connect } from "react-redux";
+import { actionGetLocation } from "../../actions/locationActions";
+
+const Profile: React.FC = (props: any) => {
   const userName: string = localStorage.getItem("userName") || "";
+  const { actionGetLocation } = props;
+  useEffect(() => {
+    actionGetLocation();
+  }, [actionGetLocation]);
+
   return (
-    <s.Profile>
+    <>
+      {console.log("notes---", props.location.data)}
       <c.Header />
-      <h3>My profile</h3>
-      <h2>{`Hello ${userName}`}</h2>
-    </s.Profile>
+      <s.Profile>
+        <s.Image src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" />
+        <h2>{`Hello ${userName}`}</h2>
+        {props.location.data === undefined ? (
+          null
+        ) : (
+          <>{props.location.data.city}</>
+        )}
+      </s.Profile>
+    </>
   );
 };
+const mapStateToProps = (state: any) => {
+  return {
+    location: state.data.location,
+  };
+};
+const mapDispatchToProps = {
+  actionGetLocation,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

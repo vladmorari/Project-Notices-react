@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as p from "./pages";
 import * as c from "./components";
+import Profile from "./pages/Profile/Profile"
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import * as req from "./components/requests";
 //Redux version
@@ -58,7 +59,7 @@ const App: React.FC = () => {
         <PrivateRoute
           exact
           path="/"
-          component={p.Profile}
+          component={Profile}
           isAuthenticated={isAuthenticated}
         />
         <PrivateRoute

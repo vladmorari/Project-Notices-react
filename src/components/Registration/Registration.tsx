@@ -49,7 +49,7 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
   };
 
   useEffect(() => {
-    if (username.length > 4 && mail.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+    if (username.length > 4 && mail.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
       setDisableButton(false);
     } else {
       setDisableButton(true);

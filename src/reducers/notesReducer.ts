@@ -10,13 +10,12 @@ interface Action {
   payload: { notes: Array<Object> };
 }
 
-export default function appReducer(
+export default function notesReducer(
   state: NotesState = initState,
   action: Action
 ) {
   switch (action.type) {
     case GET_NOTES: {
-      // console.log("notesReducer",action.payload );
       return { ...state, notes: action.payload };
     }
 

@@ -62,3 +62,8 @@ export const createUser = (
 ) => {
   return axios.post(`register`, { username, mail, password });
 };
+export const getLocation = () => {
+  return axios.get(
+    `https://api.ipgeolocation.io/ipgeo?apiKey=3ce78b0b39b14298b4429e3e410f02b9`
+  );
+};
