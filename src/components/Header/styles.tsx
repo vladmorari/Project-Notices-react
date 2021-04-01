@@ -10,6 +10,7 @@ export const Header = styled.div`
     rgba(168, 168, 168, 0) 88%
   );
   height: 46px;
+  padding: 4px;
 `;
 export const Nav = styled.nav`
   display: flex;
