@@ -34,14 +34,14 @@ export const NewNotice: React.FC = () => {
     <>
       <c.Header />
       <s.Content>
-        <label>Title:</label>
-        <input type="text" onChange={setTitleValue} />
-        <label>Content:</label>
-        <textarea onChange={setContentValue} />
-        <s.ButtonDiv>
+        <s.Label>Title:</s.Label>
+        <s.Input type="text" onChange={setTitleValue} />
+        <s.Label>Content:</s.Label>
+        <s.Textarea onChange={setContentValue} />
+        <s.ButtonBox>
           <s.Button onClick={handleSubmit}>Add</s.Button>
           <s.Button onClick={goToNotes}>Cancel</s.Button>
-        </s.ButtonDiv>
+        </s.ButtonBox>
       </s.Content>
     </>
   );

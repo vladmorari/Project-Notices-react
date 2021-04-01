@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import * as s from "./styles";
 interface Props {
   notice: any;
