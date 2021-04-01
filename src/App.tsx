@@ -32,7 +32,7 @@ const App: React.FC = () => {
           exact
           path="/login"
           render={(props) => (
-            <p.Login {...props} setIsAuthenticated={setIsAuthenticated} />
+            <c.Login {...props} setIsAuthenticated={setIsAuthenticated} />
           )}
         />
         <Route

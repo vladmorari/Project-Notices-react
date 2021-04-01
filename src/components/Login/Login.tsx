@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import * as s from "./style";
-import * as req from "../../components/requests";
+import * as req from "../requests";
 
 export const Login: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();

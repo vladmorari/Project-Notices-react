@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as s from "./styles";
 import * as req from "../requests";
 import { useHistory } from "react-router-dom";
-export const Registration: React.FC<any> = ({setIsAuthenticated}) => {
+export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();
   const [username, setUsername] = React.useState("");
   const [mail, setMail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [disableButton, setDisableButton] = React.useState(true);
 
   const goToLogin = () => {
     history.push("/login");
@@ -39,31 +40,42 @@ export const Registration: React.FC<any> = ({setIsAuthenticated}) => {
             .catch((err) => {
               console.log(err);
             });
-            /////////////////////////////////////
+          /////////////////////////////////////
         }
       })
       .catch((err) => {
         console.log("ceva nu a mers");
       });
   };
+
+  useEffect(() => {
+    if (username.length > 4 && mail.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [mail, username]);
+
   return (
     <s.Content>
-      <s.Field>
-        <label>Username </label>
-        <input type="text" onChange={userNameToState} />
-      </s.Field>
-      <s.Field>
-        <label>Mail </label>
-        <input type="email" onChange={userMailToState} />
-      </s.Field>
-      <s.Field>
-        <label>Password </label>
-        <input type="password" onChange={userPasswordToState} />
-      </s.Field>
-      <s.Field>
-        <button onClick={onSubmit}>Registration</button>
-        <button onClick={goToLogin}>Cancel</button>
-      </s.Field>
+      <s.Box>
+        <s.Label>Username </s.Label>
+        <s.Input type="text" onChange={userNameToState} placeholder={"more 4 characters"}/>
+      </s.Box>
+      <s.Box>
+        <s.Label>Mail </s.Label>
+        <s.Input type="email" onChange={userMailToState} placeholder={"example@mail.com"} />
+      </s.Box>
+      <s.Box>
+        <s.Label>Password </s.Label>
+        <s.Input type="password" onChange={userPasswordToState} />
+      </s.Box>
+      <s.BoxButton>
+        <s.Button onClick={onSubmit} disabled={disableButton}>
+          Registration
+        </s.Button>
+        <s.Button onClick={goToLogin}>Cancel</s.Button>
+      </s.BoxButton>
     </s.Content>
   );
 };
