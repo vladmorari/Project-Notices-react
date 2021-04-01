@@ -10,15 +10,16 @@ export const L = styled(Link)`
   height: fit-content;
   list-style-type: none;
   text-decoration: none;
-  color: black;
+  color: green;
+  font-weight: 600;
   width: fit-content;
   padding: 4px;
-  border: 2px solid black;
+  border: 2px solid white;
   margin-left: 2%;
   cursor: pointer;
   border-radius: 4px;
   &:hover {
-    background-color: green;
+    background-color: orange;
   }
   &:active {
     background-color: greenyellow;

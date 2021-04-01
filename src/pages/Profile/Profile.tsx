@@ -8,7 +8,7 @@ const Profile: React.FC = (props: any) => {
   const userName: string = localStorage.getItem("userName") || "";
   const { actionGetLocation } = props;
   useEffect(() => {
-    actionGetLocation();
+   // actionGetLocation();
   }, [actionGetLocation]);
 
   return (
@@ -17,11 +17,16 @@ const Profile: React.FC = (props: any) => {
       <c.Header />
       <s.Profile>
         <s.Image src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" />
-        <h2>{`Hello ${userName}`}</h2>
-        {props.location.data === undefined ? (
-          null
-        ) : (
-          <>{props.location.data.city}</>
+        <s.Wellcome>{`Hello ${userName}`}</s.Wellcome>
+        {props.location.data === undefined ? null : (
+          <>
+            <s.Info>
+              {`At the moment you are in 
+             ${props.location.data.city}  ${props.location.data.country_name}`}
+            </s.Info>
+            <s.Flag src={props.location.data.country_flag} />
+            <s.Info>To create or check your NOTES list, please access 'My Notices' link </s.Info>
+          </>
         )}
       </s.Profile>
     </>
