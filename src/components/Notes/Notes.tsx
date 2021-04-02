@@ -6,14 +6,17 @@ import { connect } from "react-redux";
 
 const Notes: React.FC = (props: any) => {
   const { actionGetNotes } = props;
+
   useEffect(() => {
     actionGetNotes();
-  }, [actionGetNotes]);
+  }, []);
 
   return (
     <s.Notes>
-      {!Array.isArray(props.notes.data) ? (
-        <div>Not notice yet, you can add one !</div>
+      {!props.notes.data ? (
+        <div>Loading</div>
+      ) : props.notes.data.length === 0 ? (
+        <div>There are no notes... Add one</div>
       ) : (
         <div>
           {props.notes.data.map((tag: any) => (

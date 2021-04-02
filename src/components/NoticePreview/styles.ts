@@ -9,6 +9,7 @@ export const Notice = styled(Link)`
   text-align: center;
   flex-direction: column;
   margin: auto;
+  overflow: hidden;
   margin-top: 26px;
   margin-bottom: 10px;
   height: fit-content;

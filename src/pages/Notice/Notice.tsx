@@ -40,21 +40,19 @@ export const Notice: React.FC = () => {
   }, [params.id]);
 
   return Object.keys(noticeData).length === 0 ? (
-    <>Loading</>
+    <>Loading...</>
   ) : (
     <>
       <c.Header />
-
       <s.Notice>
         <s.Close onClick={goToNotice}>X</s.Close>
-        <h3> {`${noticeData.title}`}</h3>
-        <h3> {`${noticeData.content}`}</h3>
-
-        <div>
-          <button onClick={toogleDeliteModal}>Delete</button>
-          <button onClick={toogleEditModal}>Edite</button>
-        </div>
-        <M.ModalEdit //apelam cmodalul si ii transmitem urmatoarele elemente
+        <s.Title> {`${noticeData.title}`}</s.Title>
+        <s.Content> {`${noticeData.content}`}</s.Content>
+        <s.ButtonBox>
+          <s.Button onClick={toogleDeliteModal}>Delete</s.Button>
+          <s.Button onClick={toogleEditModal}>Edite</s.Button>
+        </s.ButtonBox>
+        <M.ModalEdit //apelam modalul si ii transmitem urmatoarele elemente
           noticeId={params.id}
           notice={noticeData}
           isOpen={isEditModalOpen}

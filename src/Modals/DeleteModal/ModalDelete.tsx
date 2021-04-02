@@ -30,9 +30,11 @@ export const ModalDelete: React.FC<ModalProps> = ({
   return isOpen ? (
     <s.Modal>
       <s.Content>
-        <h1>Are you sure want to delete this notice ?</h1>
-        <button onClick={yesButton}>yes</button>
-        <button onClick={onClose}>No</button>
+        <s.Warning>Are you sure you want to delete this note ?</s.Warning>
+        <s.BoxButton>
+          <s.ButtonYes onClick={yesButton}>Yes</s.ButtonYes>
+          <s.ButtonNo onClick={onClose}>No</s.ButtonNo>
+        </s.BoxButton>
       </s.Content>
     </s.Modal>
   ) : null;
