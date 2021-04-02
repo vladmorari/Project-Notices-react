@@ -2,24 +2,25 @@ import React, { useEffect } from "react";
 import * as s from "./styles";
 import { NoticePreview } from "../NoticePreview";
 import { actionGetNotes } from "../../actions/notesActions";
-import { connect } from "react-redux";
-
-const Notes: React.FC = (props: any) => {
-  const { actionGetNotes } = props;
+import { useDispatch, useSelector } from "react-redux";
+const Notes: React.FC = () => {
+  const dispatch = useDispatch();
+  const notes = useSelector((state: any) => state.notes.notes.data);
 
   useEffect(() => {
-    actionGetNotes();
+    dispatch(actionGetNotes());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <s.Notes>
-      {!props.notes.data ? (
+      {!notes ? (
         <div>Loading</div>
-      ) : props.notes.data.length === 0 ? (
+      ) : notes.length === 0 ? (
         <div>There are no notes... Add one</div>
       ) : (
         <div>
-          {props.notes.data.map((tag: any) => (
+          {notes.map((tag: any) => (
             <NoticePreview key={tag._id} notice={tag} />
           ))}
         </div>
@@ -27,12 +28,5 @@ const Notes: React.FC = (props: any) => {
     </s.Notes>
   );
 };
-const mapStateToProps = (state: any) => {
-  return {
-    notes: state.notes.notes,
-  };
-};
-const mapDispatchToProps = {
-  actionGetNotes,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Notes);
+
+export default Notes;
