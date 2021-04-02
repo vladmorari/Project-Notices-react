@@ -46,13 +46,15 @@ export const ModalEdit: React.FC<ModalProps> = ({
   return isOpen ? (
     <s.Modal>
       <s.Content>
-        <h4>Edit note</h4>
-        <label>Title:</label>
-        <input  value={titleState} onChange={changeTitle} />
-        <label>Content:</label>
-        <textarea  value={contentState} onChange={changeContent} />
-        <button onClick={onClose}>Cancel</button>
-        <button onClick={onApply}>Apply</button>
+        <h2>Edit note</h2>
+        <s.Label>Title:</s.Label>
+        <input value={titleState} onChange={changeTitle} />
+        <s.Label>Content:</s.Label>
+        <textarea value={contentState} onChange={changeContent} />
+        <s.BoxButton>
+          <s.Button onClick={onClose}>Cancel</s.Button>
+          <s.Button onClick={onApply}>Apply</s.Button>
+        </s.BoxButton>
       </s.Content>
     </s.Modal>
   ) : null;

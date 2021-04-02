@@ -55,8 +55,8 @@ export const ButtonNo = styled.div`
   width: 56px;
   text-align: center;
   border-radius: 4px;
-  background-color: green;
-  color: black;
+  background-color: #00B22C;
+  color: white;
   font-weight: 600;
   cursor: pointer;
   &:hover {
