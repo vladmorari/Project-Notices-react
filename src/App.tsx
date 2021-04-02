@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as p from "./pages";
 import * as c from "./components";
-import Profile from "./pages/Profile/Profile"
+import Profile from "./pages/Profile/Profile";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import * as req from "./components/requests";
+import { useSelector } from "react-redux";
+
 //Redux version
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(true);
-
+  const isLoading = useSelector((state: any) => state.isLoading.isLoading);
   useEffect(() => {
     req
       .checkAuth()
@@ -28,6 +30,8 @@ const App: React.FC = () => {
 
   return (
     <>
+      {isLoading ? <c.IsLoading></c.IsLoading> : null}
+
       <Switch>
         <Route
           exact

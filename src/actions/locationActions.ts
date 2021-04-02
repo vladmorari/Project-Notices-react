@@ -1,7 +1,7 @@
 import * as req from "../components/requests";
 import { GET_LOCATION } from "./constants";
 
-export const actionGetLocation = () => async (dispatch: any) => {
+export const actionGetLocation = () =>(dispatch: any) => {
   req
     .getLocation()
     .then((res) => {
