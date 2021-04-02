@@ -20,12 +20,16 @@ export const LogOut: React.FC<any> = ({ setIsAuthenticated }) => {
       .catch(console.error);
   };
   return (
-    <s.LogOut>
+    <>
+     
       <c.Header />
-      
-      <h3>Are you sure you want to Log Out ?</h3>
-      <button onClick={yesButton}>Yes</button>
-      <button onClick={noButton}>No</button>
-    </s.LogOut>
+      <s.LogOut>
+        <s.Box>
+          <h3>Are you sure you want to Log Out ?</h3>
+          <s.Button onClick={yesButton}>Yes</s.Button>
+          <s.Button onClick={noButton}>No</s.Button>
+        </s.Box>
+      </s.LogOut>
+    </>
   );
 };
