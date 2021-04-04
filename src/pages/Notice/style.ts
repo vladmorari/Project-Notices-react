@@ -43,6 +43,7 @@ export const ButtonBox = styled.div`
   padding: 4px;
   width: auto;
   display: flex;
+  justify-content: space-around;
 `;
 export const Button = styled.button`
   margin: 0px 18px;
@@ -51,5 +52,8 @@ export const Button = styled.button`
   &:active {
     background-color: rgba(6, 24, 44, 0.65);
     color: white;
+  }
+  @media (max-width: 700px) {
+    width: 60px;
   }
 `;

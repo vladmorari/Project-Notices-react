@@ -7,8 +7,8 @@ export const Modal = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 98.9vw;
-  height: 250vw;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.84);
 `;
 
@@ -21,18 +21,25 @@ export const Content = styled.div`
   width: fit-fit-content;
   align-items: center;
   padding: 20px;
+  @media (max-width: 700px) {
+    width: 40%;
+  }
 `;
 export const Warning = styled.div`
   color: red;
   font-size: 18px;
   font-weight: 600;
   width: 346px;
+  @media (max-width: 700px) {
+    font-weight: 300;
+    width: 100%;
+  }
 `;
 export const BoxButton = styled.div`
   margin-top: 20px;
   width: 160px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 export const ButtonYes = styled.div`
   border: 1px solid black;
@@ -47,7 +54,7 @@ export const ButtonYes = styled.div`
     background-color: #990000;
   }
   &:active {
-    background-color: #5F0002;
+    background-color: #5f0002;
   }
 `;
 export const ButtonNo = styled.div`
@@ -55,7 +62,7 @@ export const ButtonNo = styled.div`
   width: 56px;
   text-align: center;
   border-radius: 4px;
-  background-color: #00B22C;
+  background-color: #00b22c;
   color: white;
   font-weight: 600;
   cursor: pointer;

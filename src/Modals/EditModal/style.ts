@@ -8,8 +8,8 @@ export const Modal = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 100vw;
-  height: 140vw;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.64);
 `;
 
@@ -22,7 +22,9 @@ export const Content = styled.div`
   width: 20%;
   align-items: center;
   padding: 30px;
-
+  @media (max-width: 700px) {
+    width: 40%;
+  }
 `;
 export const Label = styled.label`
   font-size: 18px;
@@ -40,7 +42,7 @@ export const Button = styled.div`
   width: 60px;
   text-align: center;
   border-radius: 4px;
-  background-color: #6EB200;
+  background-color: #6eb200;
   color: black;
   font-weight: 600;
   cursor: pointer;

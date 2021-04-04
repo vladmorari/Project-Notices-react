@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(true);
   const isLoading = useSelector((state: any) => state.isLoading.isLoading);
-  
+
   useEffect(() => {
     req
       .checkAuth()
@@ -34,15 +34,23 @@ const App: React.FC = () => {
       {isLoading ? <c.IsLoading></c.IsLoading> : null}
 
       <Switch>
+        <PrivateRoute
+          path="/notices/:id"
+          component={p.Notice}
+          isAuthenticated={isAuthenticated}
+        />
+        <PrivateRoute
+          path="/notices"
+          component={p.MyNotices}
+          isAuthenticated={isAuthenticated}
+        />
         <Route
-          exact
           path="/login"
           render={(props) => (
             <c.Login {...props} setIsAuthenticated={setIsAuthenticated} />
           )}
         />
         <Route
-          exact
           path="/registration"
           render={() => (
             <c.Registration setIsAuthenticated={setIsAuthenticated} />
@@ -50,33 +58,19 @@ const App: React.FC = () => {
         />
 
         <PrivateRoute
-          exact
           path="/logout"
           isAuthenticated={isAuthenticated}
           render={() => <p.LogOut setIsAuthenticated={setIsAuthenticated} />}
         />
+
         <PrivateRoute
-          exact
-          path="/notices"
-          component={p.MyNotices}
-          isAuthenticated={isAuthenticated}
-        />
-        <PrivateRoute
-          exact
-          path="/"
-          component={Profile}
-          isAuthenticated={isAuthenticated}
-        />
-        <PrivateRoute
-          exact
-          path="/notices/:id"
-          component={p.Notice}
-          isAuthenticated={isAuthenticated}
-        />
-        <PrivateRoute
-          exact
           path="/createNote"
           component={p.NewNotice}
+          isAuthenticated={isAuthenticated}
+        />
+        <PrivateRoute
+          path="/"
+          component={Profile}
           isAuthenticated={isAuthenticated}
         />
       </Switch>
