@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as c from "../../components";
 import * as s from "./style";
 import * as req from "../../components/requests";
 import * as M from "../../Modals";
+import { isLoadingAction } from "../../actions/isLoadingActions";
 interface Params {
   id: string;
 }
@@ -11,6 +13,7 @@ interface Params {
 export const Notice: React.FC = () => {
   const history = useHistory();
   const params: Params = useParams();
+  const dispatch = useDispatch();
   const [noticeData, setNoticeData] = React.useState({
     title: "",
     content: "",
@@ -40,9 +43,10 @@ export const Notice: React.FC = () => {
   }, [params.id]);
 
   return Object.keys(noticeData).length === 0 ? (
-    <>Loading...</>
+    <>{dispatch(isLoadingAction(true))}</>
   ) : (
     <>
+      {dispatch(isLoadingAction(false))}
       <c.Header />
       <s.Notice>
         <s.Close onClick={goToNotice}>X</s.Close>

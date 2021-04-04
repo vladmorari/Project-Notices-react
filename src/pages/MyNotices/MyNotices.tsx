@@ -1,7 +1,6 @@
 import React from "react";
 import * as s from "./style";
 import * as c from "../../components";
-//import { Notes } from "../../components/Notes/Notes";
 import Notes from "../../components/Notes/Notes"
 export const MyNotices: React.FC = () => {
   return (

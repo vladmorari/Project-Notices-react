@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import * as s from "./styles";
 import * as req from "../requests";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { isLoadingAction } from "../../actions/isLoadingActions";
 export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();
   const [username, setUsername] = React.useState("");
   const [mail, setMail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [disableButton, setDisableButton] = React.useState(true);
+  const dispatch = useDispatch();
 
   const goToLogin = () => {
     history.push("/login");
@@ -22,6 +25,7 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
     setPassword(e.target.value);
   };
   const onSubmit = () => {
+    dispatch(isLoadingAction(true));
     req
       .createUser(username, mail, password)
       .then((res) => {
@@ -34,41 +38,56 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("userName", res.data.user);
                 setIsAuthenticated(true);
+                dispatch(isLoadingAction(false));
                 return history.push("/");
               }
             })
             .catch((err) => {
               console.log(err);
+              dispatch(isLoadingAction(false));
             });
           /////////////////////////////////////
         }
       })
       .catch((err) => {
+        dispatch(isLoadingAction(false));
         console.log("ceva nu a mers");
       });
   };
 
   useEffect(() => {
-    if (username.length > 4 && mail.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+    if (
+      username.length > 4 &&
+      mail.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) &&
+      password.length > 4
+    ) {
       setDisableButton(false);
     } else {
       setDisableButton(true);
     }
-  }, [mail, username]);
+  }, [mail, username, password]);
 
   return (
     <s.Content>
       <s.Box>
         <s.Label>Username </s.Label>
-        <s.Input type="text" onChange={userNameToState} placeholder={"more 4 characters"}/>
+        <s.Input
+          type="text"
+          onChange={userNameToState}
+          placeholder={"more 4 characters"}
+        />
       </s.Box>
       <s.Box>
         <s.Label>Mail </s.Label>
-        <s.Input type="email" onChange={userMailToState} placeholder={"example@mail.com"} />
+        <s.Input
+          type="email"
+          onChange={userMailToState}
+          placeholder={"example@mail.com"}
+        />
       </s.Box>
       <s.Box>
         <s.Label>Password </s.Label>
-        <s.Input type="password" onChange={userPasswordToState} />
+        <s.Input type="password" onChange={userPasswordToState} placeholder={"more 4 characters"}/>
       </s.Box>
       <s.BoxButton>
         <s.Button onClick={onSubmit} disabled={disableButton}>

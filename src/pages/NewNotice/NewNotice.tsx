@@ -27,7 +27,7 @@ export const NewNotice: React.FC = () => {
         }
       })
       .catch((err) => {
-        console.log("eroare...", err);
+        console.log("error..", err);
       });
   };
   return (
