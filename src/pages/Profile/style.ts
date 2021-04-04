@@ -6,6 +6,12 @@ export const Profile = styled.div`
 export const Image = styled.img`
   margin: auto;
   margin-top: 60px;
+  background: rgb(2, 3, 4);
+  background: radial-gradient(
+    circle,
+    rgba(2, 3, 4, 0.6474964985994398) 2%,
+    rgba(3, 11, 11, 1) 78%
+  );
   height: 160px;
   width: 160px;
   border-radius: 100px;
