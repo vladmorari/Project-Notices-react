@@ -11,13 +11,17 @@ export const NewNotice: React.FC = () => {
   const goToNotes = () => {
     history.push("/notices");
   };
-  const setTitleValue = (e: any) => {
+  const setTitleValue = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setTitle(e.target.value);
   };
-  const setContentValue = (e: any) => {
+  const setContentValue = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setContent(e.target.value);
   };
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     req
       .addNote(title, content)

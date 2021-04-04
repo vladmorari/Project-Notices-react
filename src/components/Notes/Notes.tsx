@@ -9,7 +9,7 @@ const Notes: React.FC = () => {
   const dispatch = useDispatch();
   const notes = useSelector((state: any) => state.notes.notes.data);
   useEffect(() => {
-     dispatch(actionGetNotes());
+    dispatch(actionGetNotes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -25,7 +25,7 @@ const Notes: React.FC = () => {
       ) : (
         <div>
           {dispatch(isLoadingAction(false))}
-          {notes.map((tag: any) => (
+          {notes.map((tag: { _id: number; title: string; content: string }) => (
             <NoticePreview key={tag._id} notice={tag} />
           ))}
         </div>

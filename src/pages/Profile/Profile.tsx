@@ -10,7 +10,7 @@ const Profile: React.FC = () => {
   const location = useSelector((state: any) => state.location.location.data);
   useEffect(() => {
     setUserName(localStorage.getItem("userName") || "");
-   // dispatch(actionGetLocation());
+    dispatch(actionGetLocation());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
