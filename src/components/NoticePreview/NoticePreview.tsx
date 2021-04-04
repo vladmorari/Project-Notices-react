@@ -1,10 +1,7 @@
 import React from "react";
 import * as s from "./styles";
-interface Props {
-  notice: any;
-}
 
-export const NoticePreview: React.FC<Props> = (prop) => {
+export const NoticePreview: React.FC<any> = (prop) => {
   return (
     <s.Notice to={`/notices/${prop.notice._id}`}>
       <s.Title>{`${prop.notice.title}`}</s.Title>

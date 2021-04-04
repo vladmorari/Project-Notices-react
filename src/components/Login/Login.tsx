@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import * as s from "./style";
 import * as req from "../requests";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { isLoadingAction } from "../../actions/isLoadingActions";
 
 export const Login: React.FC<any> = ({ setIsAuthenticated }) => {

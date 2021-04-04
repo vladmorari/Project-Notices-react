@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(true);
   const isLoading = useSelector((state: any) => state.isLoading.isLoading);
+  
   useEffect(() => {
     req
       .checkAuth()

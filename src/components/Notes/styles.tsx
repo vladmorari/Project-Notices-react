@@ -7,3 +7,9 @@ export const Notes = styled.div`
   overflow: auto;
 
 `;
+
+export const NoNotes = styled.h2`
+
+  text-align: center;
+  color: sienna;
+`;
