@@ -5,20 +5,26 @@ import * as req from "../requests";
 import { useDispatch } from "react-redux";
 import { isLoadingAction } from "../../actions/isLoadingActions";
 
+
 export const Login: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();
   const [username, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errMesage, setErrMesage] = React.useState("");
   const dispatch = useDispatch();
-  const handeleUsernameChange = (e: any) => {
+  
+  const handeleUsernameChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setUserName(e.target.value);
   };
-  const handelePasswordChange = (e: any) => {
+  const handelePasswordChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     setErrMesage("");
     dispatch(isLoadingAction(true));
     e.preventDefault();

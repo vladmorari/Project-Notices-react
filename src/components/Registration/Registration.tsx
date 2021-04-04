@@ -4,8 +4,10 @@ import * as req from "../requests";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { isLoadingAction } from "../../actions/isLoadingActions";
+
 export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
   const history = useHistory();
+
   const [username, setUsername] = React.useState("");
   const [mail, setMail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -15,13 +17,19 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
   const goToLogin = () => {
     history.push("/login");
   };
-  const userNameToState = (e: any) => {
+  const userNameToState = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setUsername(e.target.value);
   };
-  const userMailToState = (e: any) => {
+  const userMailToState = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setMail(e.target.value);
   };
-  const userPasswordToState = (e: any) => {
+  const userPasswordToState = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setPassword(e.target.value);
   };
   const onSubmit = () => {
@@ -30,7 +38,6 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
       .createUser(username, mail, password)
       .then((res) => {
         if (res.status === 200) {
-          ///nu prea pare ok asa
           req
             .logIn(username, password)
             .then((res) => {
@@ -46,12 +53,11 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
               console.log(err);
               dispatch(isLoadingAction(false));
             });
-          /////////////////////////////////////
         }
       })
       .catch((err) => {
         dispatch(isLoadingAction(false));
-        console.log("ceva nu a mers");
+        console.log("err", err);
       });
   };
 
@@ -87,7 +93,11 @@ export const Registration: React.FC<any> = ({ setIsAuthenticated }) => {
       </s.Box>
       <s.Box>
         <s.Label>Password </s.Label>
-        <s.Input type="password" onChange={userPasswordToState} placeholder={"more 4 characters"}/>
+        <s.Input
+          type="password"
+          onChange={userPasswordToState}
+          placeholder={"more 4 characters"}
+        />
       </s.Box>
       <s.BoxButton>
         <s.Button onClick={onSubmit} disabled={disableButton}>
